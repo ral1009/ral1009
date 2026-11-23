@@ -1,4 +1,4 @@
-name: Update stats cards
+name: Update stats card
 on:
   schedule:
     - cron: "0 0 * * *"   # daily
@@ -7,8 +7,6 @@ on:
     paths:
       - ".github/stats-template.svg"
       - ".github/workflows/downloads.yml"
-      - ".github/project-template.svg"
-      - ".github/build-cards.sh"
 
 permissions:
   contents: write
@@ -36,15 +34,10 @@ jobs:
           export UPDATED="$(date -u +"%b %-d, %Y")" NAME="$name" STARS=$(fmt $stars) COMMITS=$(fmt $commits) DOWNLOADS=$(fmt $downloads)
           envsubst < .github/stats-template.svg > stats.svg
           cat stats.svg
-      - name: Draw featured project cards
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USER: ${{ github.repository_owner }}
-        run: bash .github/build-cards.sh
       - name: Commit
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add stats.svg cards
+          git add stats.svg
           git rm -q --ignore-unmatch downloads.json
-          git diff --cached --quiet || (git commit -m "Update stats cards" && git push)
+          git diff --cached --quiet || (git commit -m "Update stats card" && git push)
