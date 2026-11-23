@@ -2,8 +2,7 @@
 <p align="center">Port Moody Secondary School · Grad 2027</p>
 
 <p align="center">
-  <img src="./stats.svg" width="400">
-  <img src="https://streak-stats.demolab.com?user=ral1009&theme=dark&hide_border=true" width="400">
+  <img src="./stats.svg" width="800">
 </p>
 
 <div align="center">

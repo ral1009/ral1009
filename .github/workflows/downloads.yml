@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: "0 0 * * *"   # daily
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/stats-template.svg"
+      - ".github/workflows/downloads.yml"
 
 permissions:
   contents: write
@@ -27,7 +31,7 @@ jobs:
           done
           name=$(gh api "users/$USER" --jq '.name // .login')
           fmt() { echo "$1" | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'; }
-          export NAME="$name" STARS=$(fmt $stars) COMMITS=$(fmt $commits) DOWNLOADS=$(fmt $downloads)
+          export UPDATED="$(date -u +"%b %-d, %Y")" NAME="$name" STARS=$(fmt $stars) COMMITS=$(fmt $commits) DOWNLOADS=$(fmt $downloads)
           envsubst < .github/stats-template.svg > stats.svg
           cat stats.svg
       - name: Commit
