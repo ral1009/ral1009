@@ -1,4 +1,4 @@
-<h1 align="center">Hi there 👋, I'm Ryan!</h1>
+<h1 align="center">Hi, I'm Ryan!</h1>
 <p align="center">Port Moody Secondary School · Grad 2027</p>
 
 <p align="center">
