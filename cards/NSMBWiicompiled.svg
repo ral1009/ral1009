@@ -39,6 +39,6 @@
 
     <circle cx="28" cy="133" r="6" fill="#f34b7d"/>
     <text x="40" y="138" class="meta">C++</text>
-    <text x="368" y="138" class="meta" text-anchor="end"><tspan fill="#e3b341">★</tspan> 172<tspan dx="14" fill="#00b7ff">↓</tspan> 5,259</text>
+    <text x="368" y="138" class="meta" text-anchor="end"><tspan fill="#e3b341">★</tspan> 172<tspan dx="14" fill="#00b7ff">↓</tspan> 5,268</text>
   </g>
 </svg>
