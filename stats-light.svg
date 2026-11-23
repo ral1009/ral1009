@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="88" viewBox="0 0 800 88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="178 stars, 215 commits, 5,266 release downloads">
+<rect x="0.5" y="0.5" width="799" height="87" rx="6" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="266.5" y1="1" x2="266.5" y2="87" stroke="#d1d9e0"/>
+<line x1="533.5" y1="1" x2="533.5" y2="87" stroke="#d1d9e0"/>
+<text x="20" y="34" font-size="12" fill="#59636e">Stars</text>
+<text x="20" y="66" font-size="24" font-weight="600" fill="#1f2328">178</text>
+<text x="287" y="34" font-size="12" fill="#59636e">Commits</text>
+<text x="287" y="66" font-size="24" font-weight="600" fill="#1f2328">215</text>
+<text x="554" y="34" font-size="12" fill="#59636e">Release downloads</text>
+<text x="554" y="66" font-size="24" font-weight="600" fill="#1f2328">5,266</text>
+</svg>
