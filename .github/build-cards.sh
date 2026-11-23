@@ -67,7 +67,7 @@ card() {
       echo "<text x=\"40\" y=\"30\" font-size=\"14\" font-weight=\"600\" fill=\"$LINK\">$title</text>"
       if [ -n "$label" ]; then
         local w=$(( ${#label} * 6 + 16 ))
-        echo "<rect x=\"$(( 378.5 - w ))\" y=\"16.5\" width=\"$w\" height=\"19\" rx=\"9.5\" fill=\"none\" stroke=\"$BORDER\"/>"
+        echo "<rect x=\"$(( 378 - w )).5\" y=\"16.5\" width=\"$w\" height=\"19\" rx=\"9.5\" fill=\"none\" stroke=\"$BORDER\"/>"
         echo "<text x=\"$(( 378 - w / 2 ))\" y=\"30\" font-size=\"11\" font-weight=\"500\" fill=\"$MUTED\" text-anchor=\"middle\">$label</text>"
       fi
       echo "<text x=\"16\" y=\"58\" font-size=\"12\" fill=\"$MUTED\">$d1</text>"
