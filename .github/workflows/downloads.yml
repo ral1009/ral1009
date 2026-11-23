@@ -1,4 +1,4 @@
-name: Update download count
+name: Update stats card
 on:
   schedule:
     - cron: "0 0 * * *"   # daily
@@ -8,25 +8,32 @@ permissions:
   contents: write
 
 jobs:
-  count:
+  stats:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Sum release downloads across all repos
+      - name: Count stars, commits and release downloads
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USER: ${{ github.repository_owner }}
         run: |
-          total=0
+          stars=$(gh api --paginate "users/$USER/repos?per_page=100" --jq '.[].stargazers_count' | awk '{s+=$1} END {print s+0}')
+          commits=$(gh api "search/commits?q=author:$USER&per_page=1" --jq '.total_count')
+          downloads=0
           for repo in $(gh api --paginate "users/$USER/repos?per_page=100" --jq '.[] | select(.fork|not) | .name'); do
             n=$(gh api --paginate "repos/$USER/$repo/releases?per_page=100" \
                  --jq '[.[].assets[].download_count] | add // 0' | awk '{s+=$1} END {print s+0}')
-            total=$((total + n))
+            downloads=$((downloads + n))
           done
-          echo "{\"schemaVersion\":1,\"label\":\"total downloads\",\"message\":\"$total\",\"color\":\"blue\"}" > downloads.json
+          name=$(gh api "users/$USER" --jq '.name // .login')
+          fmt() { echo "$1" | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'; }
+          export NAME="$name" STARS=$(fmt $stars) COMMITS=$(fmt $commits) DOWNLOADS=$(fmt $downloads)
+          envsubst < .github/stats-template.svg > stats.svg
+          cat stats.svg
       - name: Commit
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add downloads.json
-          git diff --cached --quiet || (git commit -m "Update download count" && git push)
+          git add stats.svg
+          git rm -q --ignore-unmatch downloads.json
+          git diff --cached --quiet || (git commit -m "Update stats card" && git push)
